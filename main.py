@@ -7,6 +7,8 @@ def main():
     print(f"--- Begin report of {book_path} ---")
     print(f"{num_words} words found in the document\n")
     for character in sorted_characters:
+        if not character["character"].isalpha():
+            continue
         print(f"The '{character["character"]}' character was found {character["count"]} times")
     print("--- End report ---")
     
@@ -22,11 +24,10 @@ def count_characters(text):
     characters = {}
     lowered_text = text.lower()
     for character in lowered_text:
-        if character.isalpha():
-            if character in characters:
-                characters[character] += 1
-            else:
-                characters[character] = 1
+        if character in characters:
+            characters[character] += 1
+        else:
+            characters[character] = 1
     return characters
 
 def sort_on(characters):
